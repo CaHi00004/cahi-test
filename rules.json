@@ -7,17 +7,6 @@
     "totalRules": 575
   },
   "rules": {
-    "getPeriodUpdateData": {
-      "description": "getPeriodUpdateData (option 9A->5s, E8->10s, 90->15s; default 30s, return val*1000)",
-      "type": "computed",
-      "returnType": "number",
-      "defaultValue": 30000,
-      "conditions": [
-        { "when": { "type": "option", "value": "9A" }, "return": 5000 },
-        { "when": { "type": "option", "value": "E8" }, "return": 10000 },
-        { "when": { "type": "option", "value": "90" }, "return": 15000 }
-      ]
-    },
     "isTrafficAccountType": {
       "description": "isTrafficAccountType",
       "type": "boolean",
