@@ -8010,6 +8010,16 @@
           }
         ]
       }
+    },
+    "isHas_QCD": {
+      "description": "isShowGPSTransfer (TW + (Tr_ID 20 hoặc haveGPSTransferCar runtime))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "QCD" }
+        ]
+      }
     }
   }
 }
