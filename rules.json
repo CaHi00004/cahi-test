@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "metadata": {
     "lastModified": "2026-03-10T10:03:08Z",
-    "description": "FMS customer setting rules - sync with CustomerSetting.js (maintain rules.json manually, không dùng extract-rules.js)",
+    "description": "FMS test customer setting rules - sync with CustomerSetting.js (maintain rules.json manually, không dùng extract-rules.js)",
     "totalRules": 575
   },
   "rules": {
