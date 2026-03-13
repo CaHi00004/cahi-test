@@ -3,10 +3,21 @@
   "version": "1.0.2",
   "metadata": {
     "lastModified": "2026-03-10T10:03:08Z",
-    "description": "tểtrtertreterterterter(maintain rules.json manually, không dùng extract-rules.js)",
+    "description": "FMS customer setting rules - sync with CustomerSetting.js (maintain rules.json manually, không dùng extract-rules.js)",
     "totalRules": 575
   },
   "rules": {
+    "getPeriodUpdateData": {
+      "description": "getPeriodUpdateData (option 9A->5s, E8->10s, 90->15s; default 30s, return val*1000)",
+      "type": "computed",
+      "returnType": "number",
+      "defaultValue": 30000,
+      "conditions": [
+        { "when": { "type": "option", "value": "9A" }, "return": 5000 },
+        { "when": { "type": "option", "value": "E8" }, "return": 10000 },
+        { "when": { "type": "option", "value": "90" }, "return": 15000 }
+      ]
+    },
     "isTrafficAccountType": {
       "description": "isTrafficAccountType",
       "type": "boolean",
