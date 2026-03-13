@@ -1,0 +1,8015 @@
+{
+  "$schema": "./schema.json",
+  "version": "1.0.0",
+  "metadata": {
+    "lastModified": "2026-03-10T10:03:08Z",
+    "description": "FMS customer setting rules - sync with CustomerSetting.js (maintain rules.json manually, không dùng extract-rules.js)",
+    "totalRules": 575
+  },
+  "rules": {
+    "getPeriodUpdateData": {
+      "description": "getPeriodUpdateData (option 9A->5s, E8->10s, 90->15s; default 30s, return val*1000)",
+      "type": "computed",
+      "returnType": "number",
+      "defaultValue": 30000,
+      "conditions": [
+        { "when": { "type": "option", "value": "9A" }, "return": 5000 },
+        { "when": { "type": "option", "value": "E8" }, "return": 10000 },
+        { "when": { "type": "option", "value": "90" }, "return": 15000 }
+      ]
+    },
+    "isTrafficAccountType": {
+      "description": "isTrafficAccountType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_SystemType",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    "isTire": {
+      "description": "isTire",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2Q"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isTemperature": {
+      "description": "isTemperature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "function",
+            "name": "isTemper1"
+          },
+          {
+            "type": "function",
+            "name": "isTemper2"
+          },
+          {
+            "type": "function",
+            "name": "isTemper34"
+          }
+        ]
+      }
+    },
+    "isTemper1": {
+      "description": "isTemper1",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "1N"
+          },
+          {
+            "type": "option",
+            "value": "63"
+          }
+        ]
+      }
+    },
+    "isTemper2": {
+      "description": "isTemper2",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "1N"
+          }
+        ]
+      }
+    },
+    "isTemper34": {
+      "description": "isTemper34",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "64"
+          }
+        ]
+      }
+    },
+    "isIO": {
+      "description": "isIO",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "1O"
+          }
+        ]
+      }
+    },
+    "isSpecialIO": {
+      "description": "isSpecialIO",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AD"
+          }
+        ]
+      }
+    },
+    "isDrivingHours": {
+      "description": "isDrivingHours",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4D"
+          }
+        ]
+      }
+    },
+    "isSpeedlimit": {
+      "description": "isSpeedlimit",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "3C"
+          }
+        ]
+      }
+    },
+    "isSelfSite": {
+      "description": "isSelfSite",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "20"
+          }
+        ]
+      }
+    },
+    "isFenceSetting": {
+      "description": "isFenceSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "84"
+          },
+          {
+            "type": "option",
+            "value": "85"
+          },
+          {
+            "type": "option",
+            "value": "86"
+          }
+        ]
+      }
+    },
+    "isLandmark": {
+      "description": "isLandmark",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "84"
+          }
+        ]
+      }
+    },
+    "isElectronic": {
+      "description": "isElectronic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "85"
+          }
+        ]
+      }
+    },
+    "isAdministrativeDistrict": {
+      "description": "isAdministrativeDistrict",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "86"
+          }
+        ]
+      }
+    },
+    "isFactoryMonitor": {
+      "description": "isFactoryMonitor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "94"
+          }
+        ]
+      }
+    },
+    "isSiteStay": {
+      "description": "isSiteStay",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BL"
+          }
+        ]
+      }
+    },
+    "isDriverList": {
+      "description": "isDriverList",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "25"
+          }
+        ]
+      }
+    },
+    "isTrailerMaintenance": {
+      "description": "isTrailerMaintenance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4I"
+          }
+        ]
+      }
+    },
+    "isDriverCheck": {
+      "description": "isDriverCheck",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_7"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isMaintainCheck": {
+      "description": "isMaintainCheck",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_1_9"
+          },
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_4"
+          }
+        ]
+      }
+    },
+    "isNotpositioned": {
+      "description": "isNotpositioned",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "59"
+          }
+        ]
+      }
+    },
+    "isSchoolBus": {
+      "description": "isSchoolBus",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "58"
+          }
+        ]
+      }
+    },
+    "isSchoolBusManagement": {
+      "description": "isSchoolBusManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "59"
+          }
+        ]
+      }
+    },
+    "isShow32Cars": {
+      "description": "isShow32Cars",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "40"
+          }
+        ]
+      }
+    },
+    "isArrivalTime": {
+      "description": "isArrivalTime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "53"
+          }
+        ]
+      }
+    },
+    "isRFID": {
+      "description": "isRFID",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "3G"
+          }
+        ]
+      }
+    },
+    "isAdasSetting": {
+      "description": "isAdasSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "3E"
+          }
+        ]
+      }
+    },
+    "isThiefSetting": {
+      "description": "isThiefSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "89"
+          },
+          {
+            "type": "option",
+            "value": "1F"
+          },
+          {
+            "type": "option",
+            "value": "3H"
+          }
+        ]
+      }
+    },
+    "isPathAbnormalSetting": {
+      "description": "isPathAbnormalSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "46"
+          },
+          {
+            "type": "option",
+            "value": "2R"
+          }
+        ]
+      }
+    },
+    "isShowPathAbnormalPopup": {
+      "description": "isShowPathAbnormalPopup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2R"
+          }
+        ]
+      }
+    },
+    "isPathAbnormalCarStatus": {
+      "description": "isPathAbnormalCarStatus",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "28"
+          },
+          {
+            "type": "option",
+            "value": "46"
+          },
+          {
+            "type": "option",
+            "value": "2R"
+          }
+        ]
+      }
+    },
+    "isDrivingTimeSetting": {
+      "description": "isDrivingTimeSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2X"
+          }
+        ]
+      }
+    },
+    "isEngineRPMSetting": {
+      "description": "isEngineRPMSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2Y"
+          }
+        ]
+      }
+    },
+    "isPowerOffAbnormal": {
+      "description": "isPowerOffAbnormal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4E"
+          },
+          {
+            "type": "option",
+            "value": "9T"
+          }
+        ]
+      }
+    },
+    "isAlcoholSetting": {
+      "description": "isAlcoholSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4K"
+          }
+        ]
+      }
+    },
+    "isAlcoholFieldInSectionSpy": {
+      "description": "isAlcoholFieldInSectionSpy",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BQ"
+          }
+        ]
+      }
+    },
+    "isBloodPressureSetting": {
+      "description": "isBloodPressureSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4O"
+          }
+        ]
+      }
+    },
+    "isPunchNearByLandmark": {
+      "description": "isPunchNearByLandmark",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "5A"
+          }
+        ]
+      }
+    },
+    "driverDrivingStatusQueryTime1Month": {
+      "description": "driverDrivingStatusQueryTime1Month",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AB"
+          }
+        ]
+      }
+    },
+    "isIMID24094": {
+      "description": "isIMID24094",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "24094"
+          }
+        ]
+      }
+    },
+    "isLandmarksAndFencingAreaReport": {
+      "description": "isLandmarksAndFencingAreaReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN45"
+          }
+        ]
+      }
+    },
+    "isIMID24738": {
+      "description": "isIMID24738",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "24738"
+          }
+        ]
+      }
+    },
+    "isIMID50114": {
+      "description": "isIMID50114",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "50114"
+          }
+        ]
+      }
+    },
+    "isIMID5004": {
+      "description": "isIMID5004",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "5004"
+          }
+        ]
+      }
+    },
+    "isTH06": {
+      "description": "isTH06",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH06"
+          }
+        ]
+      }
+    },
+    "isTH10": {
+      "description": "isTH10",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH10"
+          }
+        ]
+      }
+    },
+    "isTH14": {
+      "description": "isTH14",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH14"
+          }
+        ]
+      }
+    },
+    "isShowPassengerStatistics": {
+      "description": "isShowPassengerStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH20"
+          }
+        ]
+      }
+    },
+    "isIMID18515": {
+      "description": "isIMID18515",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "18515"
+          }
+        ]
+      }
+    },
+    "isSmartLogAPI": {
+      "description": "isSmartLogAPI",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "29424"
+          }
+        ]
+      }
+    },
+    "isUseNewRouteGoogleMap": {
+      "description": "isUseNewRouteGoogleMap (VN + (imid 39665 hoặc 922))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "39665" },
+              { "type": "accountField", "key": "Cust_IMID", "value": "922" }
+            ]
+          }
+        ]
+      }
+    },
+    "isTRID16": {
+      "description": "isTRID16",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Tr_ID",
+            "value": 16
+          }
+        ]
+      }
+    },
+    "isTRID20": {
+      "description": "isTRID20",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Tr_ID",
+            "value": 20
+          }
+        ]
+      }
+    },
+    "isTRID7": {
+      "description": "isTRID7",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Tr_ID",
+            "value": 7
+          }
+        ]
+      }
+    },
+    "isIMID14652VN": {
+      "description": "isIMID14652VN",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN89"
+          },
+          {
+            "type": "option",
+            "value": "VN85B"
+          }
+        ]
+      }
+    },
+    "isShowDispatchRoute": {
+      "description": "isShowDispatchRoute",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85B"
+          }
+        ]
+      }
+    },
+    "isShowDispatchMonitor": {
+      "description": "isShowDispatchMonitor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85D"
+          }
+        ]
+      }
+    },
+    "isShowNewDispatchAssignCar": {
+      "description": "isShowNewDispatchAssignCar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85C"
+          }
+        ]
+      }
+    },
+    "isDispatchAddMultiOrderAsExcel": {
+      "description": "isDispatchAddMultiOrderAsExcel",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85E"
+          }
+        ]
+      }
+    },
+    "isDriverCheckin": {
+      "description": "isDriverCheckin",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN88A"
+          }
+        ]
+      }
+    },
+    "isAddPunchRecord": {
+      "description": "isAddPunchRecord",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN101"
+          }
+        ]
+      }
+    },
+    "isHideChangePassword": {
+      "description": "isHideChangePassword",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98J"
+          }
+        ]
+      }
+    },
+    "is2FactorAuth": {
+      "description": "is2FactorAuth",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN2FA"
+          }
+        ]
+      }
+    },
+    "isShowWarningDistance": {
+      "description": "isShowWarningDistance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN101"
+          }
+        ]
+      }
+    },
+    "is2CHDVR": {
+      "description": "is2CHDVR",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN102"
+          }
+        ]
+      }
+    },
+    "isHide2CHDVRHistory": {
+      "description": "isHide2CHDVRHistory",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN12A"
+          }
+        ]
+      }
+    },
+    "isHide2CHDVRReminder": {
+      "description": "isHide2CHDVRReminder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN12B"
+          }
+        ]
+      }
+    },
+    "isDVRHumanoidRecognition": {
+      "description": "isDVRHumanoidRecognition",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN109"
+          }
+        ]
+      }
+    },
+    "isLittleBell": {
+      "description": "isLittleBell",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN117"
+          }
+        ]
+      }
+    },
+    "isCarStatusByWarm": {
+      "description": "isCarStatusByWarm",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "45"
+          }
+        ]
+      }
+    },
+    "isHideHistoryPath": {
+      "description": "isHideHistoryPath",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "0_0_4"
+          },
+          {
+            "type": "function",
+            "name": "isHideAllFunctionExceptMonitor"
+          }
+        ]
+      }
+    },
+    "isHistoryLine": {
+      "description": "isHistoryLine",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isHideAllFunctionExceptMonitor": {
+      "description": "isHideAllFunctionExceptMonitor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          }
+        ]
+      }
+    },
+    "isFuelFunction": {
+      "description": "isFuelFunction",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03"
+          },
+          {
+            "type": "option",
+            "value": "9O"
+          }
+        ]
+      }
+    },
+    "isFuelDashboard": {
+      "description": "isFuelDashboard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DK"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isIdleFuelConsumption": {
+      "description": "isIdleFuelConsumption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "17"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isAIFuelFunction": {
+      "description": "isAIFuelFunction",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03A"
+          }
+        ]
+      }
+    },
+    "isHideFuelLevel": {
+      "description": "isHideFuelLevel",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03B"
+          }
+        ]
+      }
+    },
+    "isHideFuelConsumption": {
+      "description": "isHideFuelConsumption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03C"
+          }
+        ]
+      }
+    },
+    "isShowRecordFuelDaily": {
+      "description": "isShowRecordFuelDaily",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03D"
+          },
+          {
+            "type": "option",
+            "value": "VN03"
+          },
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN03A"
+          }
+        ]
+      }
+    },
+    "isHideWarningFuelEvent": {
+      "description": "isHideWarningFuelEvent",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03H"
+          }
+        ]
+      }
+    },
+    "isCalculateIdleConsumption": {
+      "description": "isCalculateIdleConsumption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03L"
+          }
+        ]
+      }
+    },
+    "isDetailForRefuelOrder": {
+      "description": "isDetailForRefuelOrder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY05A"
+          }
+        ]
+      }
+    },
+    "isFuelSensorManagement": {
+      "description": "isFuelSensorManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY05"
+          }
+        ]
+      }
+    },
+    "isTollStation": {
+      "description": "isTollStation",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN04"
+          }
+        ]
+      }
+    },
+    "isTollStationExtend": {
+      "description": "isTollStationExtend",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN04A"
+          }
+        ]
+      }
+    },
+    "isHeinekenOption": {
+      "description": "isHeinekenOption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05A"
+          }
+        ]
+      }
+    },
+    "isShowTelematicsDashboard": {
+      "description": "isShowTelematicsDashboard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05B"
+          }
+        ]
+      }
+    },
+    "isShowTelematicsDashboardReview": {
+      "description": "isShowTelematicsDashboardReview",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05B"
+          },
+          {
+            "type": "option",
+            "value": "FB"
+          }
+        ]
+      }
+    },
+    "isShowDriverCodeForTelematics": {
+      "description": "isShowDriverCodeForTelematics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "17853"
+          }
+        ]
+      }
+    },
+    "isShowSeatbeltField": {
+      "description": "isShowSeatbeltField",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FC"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isHeinekenAccount": {
+      "description": "isHeinekenAccount",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05C"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowVendorManagement": {
+      "description": "isShowVendorManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "13085"
+          }
+        ]
+      }
+    },
+    "isShowMileageStatisticOnTelematicsDashboard": {
+      "description": "isShowMileageStatisticOnTelematicsDashboard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05D"
+          }
+        ]
+      }
+    },
+    "isContinuousDrivingOption": {
+      "description": "isContinuousDrivingOption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN09A"
+          }
+        ]
+      }
+    },
+    "isRoadSpeedLimit": {
+      "description": "isRoadSpeedLimit",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN08"
+          }
+        ]
+      }
+    },
+    "overSpeedAndFuelEventMail": {
+      "description": "overSpeedAndFuelEventMail",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN09"
+          }
+        ]
+      }
+    },
+    "isAbnormalTemperatureEventMail": {
+      "description": "isAbnormalTemperatureEventMail",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN09B"
+          }
+        ]
+      }
+    },
+    "isShowCarListOnSubAccount": {
+      "description": "isShowCarListOnSubAccount (AccountInfo && (Cust_PID empty) && option VN95A)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "value": "null" },
+              { "type": "accountField", "key": "Cust_PID", "value": null },
+              { "type": "accountField", "key": "Cust_PID", "value": "" }
+            ]
+          },
+          { "type": "option", "value": "VN95A" }
+        ]
+      }
+    },
+    "isAuthorizationLogin": {
+      "description": "isAuthorizationLogin (option VN25, setting null → false)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "settingNullCheck": true,
+        "checks": [{ "type": "option", "value": "VN25" }]
+      }
+    },
+    "isPasswordChecking": {
+      "description": "isPasswordChecking (option VN25A, setting null → false)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "settingNullCheck": true,
+        "checks": [{ "type": "option", "value": "VN25A" }]
+      }
+    },
+    "isGroupCarData": {
+      "description": "isGroupCarData",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN29"
+          }
+        ]
+      }
+    },
+    "isOperateCarFunctionShow": {
+      "description": "isOperateCarFunctionShow",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN32"
+          }
+        ]
+      }
+    },
+    "isZoomChangeMapType": {
+      "description": "isZoomChangeMapType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN39"
+          }
+        ]
+      }
+    },
+    "isContainer": {
+      "description": "isContainer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN40"
+          },
+          {
+            "type": "option",
+            "value": "AO"
+          }
+        ]
+      }
+    },
+    "isContainerWithNewDevice": {
+      "description": "isContainerWithNewDevice",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AO"
+          }
+        ]
+      }
+    },
+    "isSpecialContainer": {
+      "description": "isSpecialContainer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN40B"
+          }
+        ]
+      }
+    },
+    "isHideContainerOnCarTab": {
+      "description": "isHideContainerOnCarTab",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "VN40D" },
+          { "type": "mobile", "negate": true }
+        ]
+      }
+    },
+    "isDisplayContainer": {
+      "description": "isDisplayContainer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN40E"
+          }
+        ]
+      }
+    },
+    "isSpecialLocTarget": {
+      "description": "isSpecialLocTarget",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN44"
+          }
+        ]
+      }
+    },
+    "isMultipleEditLandmark": {
+      "description": "isMultipleEditLandmark",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN44A"
+          }
+        ]
+      }
+    },
+    "isShowMaintenanceTotalKm": {
+      "description": "isShowMaintenanceTotalKm",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DU"
+          }
+        ]
+      }
+    },
+    "isGroupSummaryJourney": {
+      "description": "isGroupSummaryJourney",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN51"
+          }
+        ]
+      }
+    },
+    "isShowDeviceConfig": {
+      "description": "isShowDeviceConfig",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowDriverLog": {
+      "description": "isShowDriverLog",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowDriverLogNotSwipe": {
+      "description": "isShowDriverLogNotSwipe",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN58C"
+          }
+        ]
+      }
+    },
+    "isHideScheduleSummaryReport": {
+      "description": "isHideScheduleSummaryReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN13"
+          }
+        ]
+      }
+    },
+    "isHideFlameoutSummaryReport": {
+      "description": "isHideFlameoutSummaryReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN14"
+          }
+        ]
+      }
+    },
+    "isHideSpeedLimitReport": {
+      "description": "isHideSpeedLimitReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN15"
+          }
+        ]
+      }
+    },
+    "isHideDrivingReport": {
+      "description": "isHideDrivingReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN16"
+          }
+        ]
+      }
+    },
+    "isHideComprehensiveReport": {
+      "description": "isHideComprehensiveReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN18"
+          }
+        ]
+      }
+    },
+    "isHideDrivingSummaryReport": {
+      "description": "isHideDrivingSummaryReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN19"
+          }
+        ]
+      }
+    },
+    "isHideVehicleSpeedStutasReport": {
+      "description": "isHideVehicleSpeedStutasReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN01"
+          },
+          {
+            "type": "option",
+            "value": "VN22"
+          }
+        ]
+      }
+    },
+    "isShowSummaryJourneyShortcut": {
+      "description": "isShowSummaryJourneyShortcut",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN23"
+          }
+        ]
+      }
+    },
+    "isSearchTodayRecordMarker": {
+      "description": "isSearchTodayRecordMarker",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN26"
+          }
+        ]
+      }
+    },
+    "isShowOverSpeedSpec": {
+      "description": "isShowOverSpeedSpec",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN28"
+          }
+        ]
+      }
+    },
+    "isShowTurnoffStatistics": {
+      "description": "isShowTurnoffStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN30"
+          }
+        ]
+      }
+    },
+    "isShowStopParking": {
+      "description": "isShowStopParking",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN30A"
+          }
+        ]
+      }
+    },
+    "isShowCostHistory": {
+      "description": "isShowCostHistory",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31"
+          }
+        ]
+      }
+    },
+    "isShowCostManagement": {
+      "description": "isShowCostManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31"
+          }
+        ]
+      }
+    },
+    "checkDupplicateCostManagement": {
+      "description": "checkDupplicateCostManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31A"
+          }
+        ]
+      }
+    },
+    "isDrawArrowOnLine": {
+      "description": "isDrawArrowOnLine",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33"
+          }
+        ]
+      }
+    },
+    "isShowLiter": {
+      "description": "isShowLiter",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03"
+          }
+        ]
+      }
+    },
+    "isOneMonthQuery": {
+      "description": "isOneMonthQuery",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33D"
+          }
+        ]
+      }
+    },
+    "isSplitStopLoseStatus": {
+      "description": "isSplitStopLoseStatus",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33G"
+          }
+        ]
+      }
+    },
+    "isHistoryPathOperatingStatus": {
+      "description": "isHistoryPathOperatingStatus",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33I"
+          }
+        ]
+      }
+    },
+    "isNewRecordConcreteLogic": {
+      "description": "isNewRecordConcreteLogic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN43E"
+          }
+        ]
+      }
+    },
+    "isCalculateBusinessTime": {
+      "description": "isCalculateBusinessTime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN43F"
+          }
+        ]
+      }
+    },
+    "isShowFuelCost": {
+      "description": "isShowFuelCost",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN35"
+          }
+        ]
+      }
+    },
+    "isShowJourneyFuelStatistics": {
+      "description": "isShowJourneyFuelStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN38"
+          }
+        ]
+      }
+    },
+    "isShowJourneyStatistics": {
+      "description": "isShowJourneyStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN41"
+          }
+        ]
+      }
+    },
+    "isShowActivityStatistics": {
+      "description": "isShowActivityStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN46"
+          }
+        ]
+      }
+    },
+    "isShowHistoryPathInSectionSpy": {
+      "description": "isShowHistoryPathInSectionSpy",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN48"
+          }
+        ]
+      }
+    },
+    "isHideRedCarCircle": {
+      "description": "isHideRedCarCircle",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02B"
+          }
+        ]
+      }
+    },
+    "isNotShowRedCarCircle": {
+      "description": "isNotShowRedCarCircle",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02Q"
+          }
+        ]
+      }
+    },
+    "isShowSortCarDataByCarTag": {
+      "description": "isShowSortCarDataByCarTag",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isReplaceCarNumberWithCarName": {
+      "description": "isReplaceCarNumberWithCarName",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02R"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowRecordSonar": {
+      "description": "isShowRecordSonar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05"
+          }
+        ]
+      }
+    },
+    "isAlwaysPinMap": {
+      "description": "isAlwaysPinMap",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN02A"
+          }
+        ]
+      }
+    },
+    "isShowCarTonnageDimensions": {
+      "description": "isShowCarTonnageDimensions",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02I"
+          }
+        ]
+      }
+    },
+    "isShowGovermentSentInfo": {
+      "description": "isShowGovermentSentInfo",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02M"
+          }
+        ]
+      }
+    },
+    "isBoldLineRouteHistoryPath": {
+      "description": "isBoldLineRouteHistoryPath",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33E"
+          }
+        ]
+      }
+    },
+    "isShowFuelStatistics": {
+      "description": "isShowFuelStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN54"
+          }
+        ]
+      }
+    },
+    "isShowFuelManagement": {
+      "description": "isShowFuelManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN59"
+          }
+        ]
+      }
+    },
+    "isSettingOdometer": {
+      "description": "isSettingOdometer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN59A"
+          }
+        ]
+      }
+    },
+    "isFuelManagementExcelImport": {
+      "description": "isFuelManagementExcelImport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "function",
+            "name": "isSettingOdometer",
+            "negate": true
+          },
+          {
+            "type": "option",
+            "value": "VN59B"
+          }
+        ]
+      }
+    },
+    "isShowMileStatistics": {
+      "description": "isShowMileStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN60"
+          }
+        ]
+      }
+    },
+    "isShowTollStationCost": {
+      "description": "isShowTollStationCost",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN04"
+          }
+        ]
+      }
+    },
+    "isNewBatchDownload": {
+      "description": "isNewBatchDownload",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN83"
+          }
+        ]
+      }
+    },
+    "isShowMyLocationOnMap": {
+      "description": "isShowMyLocationOnMap",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN84"
+          },
+          {
+            "type": "option",
+            "value": "VN84A"
+          }
+        ]
+      }
+    },
+    "isAutoUpdateMyLocationOnMap": {
+      "description": "isAutoUpdateMyLocationOnMap",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN84A"
+          }
+        ]
+      }
+    },
+    "isShowDriverPunchImage": {
+      "description": "isShowDriverPunchImage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN88"
+          }
+        ]
+      }
+    },
+    "isAncestorReminder": {
+      "description": "isAncestorReminder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98D"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowOperating": {
+      "description": "isShowOperating",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98H"
+          }
+        ]
+      }
+    },
+    "isShowExtendCarStatusData": {
+      "description": "isShowExtendCarStatusData",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN72"
+          }
+        ]
+      }
+    },
+    "isChangeCarOilConsumption": {
+      "description": "isChangeCarOilConsumption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN63"
+          }
+        ]
+      }
+    },
+    "isWarningTempertureLost": {
+      "description": "isWarningTempertureLost",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "option",
+                "value": "1N"
+              },
+              {
+                "type": "option",
+                "value": "63"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "isSummaryOrder": {
+      "description": "isSummaryOrder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "mobile", "negate": true },
+          { "type": "option", "value": "VN69" }
+        ]
+      }
+    },
+    "isShowDeviceDistance": {
+      "description": "isShowDeviceDistance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN74"
+          }
+        ]
+      }
+    },
+    "isShowSummaryOperateTime": {
+      "description": "isShowSummaryOperateTime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN74A"
+          }
+        ]
+      }
+    },
+    "isDisableAbnormalTemperatureByIO": {
+      "description": "isDisableAbnormalTemperatureByIO",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN78"
+          }
+        ]
+      }
+    },
+    "isCheckLimitQuery": {
+      "description": "isCheckLimitQuery",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "13"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isHideJourneyManagement": {
+      "description": "isHideJourneyManagement: (not VN) or (VN and option VN55 not)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          { "type": "country", "operator": "NOT_EQUALS", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "country", "value": "VN" },
+              { "type": "option", "operator": "NOT_INCLUDES", "value": "VN55" }
+            ]
+          }
+        ]
+      }
+    },
+    "isHideJourneyReport": {
+      "description": "isHideJourneyReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN55A"
+          }
+        ]
+      }
+    },
+    "isHideDeliveryJourneyStatistics": {
+      "description": "isHideDeliveryJourneyStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN43"
+          }
+        ]
+      }
+    },
+    "isHideMaintenanceHistory": {
+      "description": "isHideMaintenanceHistory",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN73"
+          }
+        ]
+      }
+    },
+    "isHideCarOdometer": {
+      "description": "isHideCarOdometer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN71"
+          }
+        ]
+      }
+    },
+    "isDisableCarMoveAnimate": {
+      "description": "isDisableCarMoveAnimate",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN68"
+          }
+        ]
+      }
+    },
+    "isFuelEventNotification": {
+      "description": "isFuelEventNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN80"
+          }
+        ]
+      }
+    },
+    "isLowFuelLevelWarning": {
+      "description": "isLowFuelLevelWarning",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03E"
+          },
+          {
+            "type": "option",
+            "value": "9O"
+          }
+        ]
+      }
+    },
+    "isHideFuelPourWithdraw": {
+      "description": "isHideFuelPourWithdraw",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03G"
+          }
+        ]
+      }
+    },
+    "isDoorReportShow": {
+      "description": "isDoorReportShow",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN106"
+          }
+        ]
+      }
+    },
+    "isIMID11946": {
+      "description": "isIMID11946",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "11946"
+          }
+        ]
+      }
+    },
+    "isDispatchGoodsManage": {
+      "description": "isDispatchGoodsManage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN92"
+          }
+        ]
+      }
+    },
+    "isDispatchContainer": {
+      "description": "isDispatchContainer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN93"
+          }
+        ]
+      }
+    },
+    "isFenceAreaStatis": {
+      "description": "isFenceAreaStatis",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN94"
+          }
+        ]
+      }
+    },
+    "isShowWarningOutSideArea": {
+      "description": "isShowWarningOutSideArea",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN94A"
+          }
+        ]
+      }
+    },
+    "isAbnormalFence": {
+      "description": "isAbnormalFence",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN94B"
+          }
+        ]
+      }
+    },
+    "isIMID15933": {
+      "description": "isIMID15933",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "15933"
+          }
+        ]
+      }
+    },
+    "isCheckDuplicateOrderNumber": {
+      "description": "isCheckDuplicateOrderNumber",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "15983"
+          }
+        ]
+      }
+    },
+    "isIMID12739": {
+      "description": "isIMID12739",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "12739"
+          }
+        ]
+      }
+    },
+    "isIMID11076": {
+      "description": "isIMID11076",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "11076"
+          }
+        ]
+      }
+    },
+    "isIMID11543": {
+      "description": "isIMID11543",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "11543"
+          }
+        ]
+      }
+    },
+    "isIMID2673": {
+      "description": "isIMID2673",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "accountField", "key": "Cust_IMID", "value": "2673" }
+        ]
+      }
+    },
+    "advanceTripReport": {
+      "description": "advanceTripReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN43A"
+          }
+        ]
+      }
+    },
+    "isAdjustCarSpeedLogDtime": {
+      "description": "isAdjustCarSpeedLogDtime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN22A"
+          }
+        ]
+      }
+    },
+    "isViewDailyReport31Days": {
+      "description": "isViewDailyReport31Days",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN22B"
+          }
+        ]
+      }
+    },
+    "isCheckPOD": {
+      "description": "isCheckPOD",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN86"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isDispatchCheckGuard": {
+      "description": "isDispatchCheckGuard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN86B"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isPodPendingCustomer": {
+      "description": "isPodPendingCustomer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN86A"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowSalaryManagement": {
+      "description": "isShowSalaryManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN100"
+          },
+          {
+            "type": "option",
+            "value": "VN10"
+          }
+        ]
+      }
+    },
+    "isSalaryVijaco": {
+      "description": "isSalaryVijaco",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN10A"
+          }
+        ]
+      }
+    },
+    "isSalarySystem": {
+      "description": "isSalarySystem",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "function",
+            "name": "isShowSalaryManagement"
+          },
+          {
+            "type": "function",
+            "name": "isSalaryVijaco"
+          }
+        ]
+      }
+    },
+    "isOnlyViewDispatchOrders": {
+      "description": "isOnlyViewDispatchOrders (pid NOT_EMPTY && (option VN85 || VN85A || VN86B))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "option", "value": "VN85" },
+              { "type": "option", "value": "VN85A" },
+              { "type": "option", "value": "VN86B" }
+            ]
+          }
+        ]
+      }
+    },
+    "isDispatchPlanningAccount": {
+      "description": "isDispatchPlanningAccount",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85A"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isChangeAccountLogo": {
+      "description": "isChangeAccountLogo",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isShowFontScale": {
+      "description": "isShowFontScale",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isAllowSetDriverRights": {
+      "description": "isAllowSetDriverRights",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isEncryptInformation": {
+      "description": "isEncryptInformation",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN79B"
+          }
+        ]
+      }
+    },
+    "isAllowSetCustomerForDriver": {
+      "description": "isAllowSetCustomerForDriver",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85F"
+          }
+        ]
+      }
+    },
+    "isDispatchGetLatLngFromGoogle": {
+      "description": "isDispatchGetLatLngFromGoogle",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85H"
+          }
+        ]
+      }
+    },
+    "isShowDispatchOrdersLog": {
+      "description": "isShowDispatchOrdersLog",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN90"
+          }
+        ]
+      }
+    },
+    "isShowDeviceKmRecordList": {
+      "description": "isShowDeviceKmRecordList",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN50"
+          }
+        ]
+      }
+    },
+    "isShowFencingAreaRecordList": {
+      "description": "isShowFencingAreaRecordList",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH17"
+          }
+        ]
+      }
+    },
+    "isShowDispatchCarType": {
+      "description": "isShowDispatchCarType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN29"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowDispatchCarManage": {
+      "description": "isShowDispatchCarManage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "5004"
+          },
+          {
+            "type": "accountField",
+            "key": "Tr_ID",
+            "value": 16
+          }
+        ]
+      }
+    },
+    "isUserLoginHistory": {
+      "description": "isUserLoginHistory",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN95"
+          }
+        ]
+      }
+    },
+    "isShowAddressOnFuelChart": {
+      "description": "isShowAddressOnFuelChart",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03Q"
+          }
+        ]
+      }
+    },
+    "isShowHourMaintenance": {
+      "description": "isShowHourMaintenance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN96"
+          }
+        ]
+      }
+    },
+    "checkMaintanNoticeTwoWeek": {
+      "description": "checkMaintanNoticeTwoWeek",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN96A"
+          }
+        ]
+      }
+    },
+    "showTeamCarInMaintenanceRemind": {
+      "description": "showTeamCarInMaintenanceRemind",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN96B"
+          }
+        ]
+      }
+    },
+    "isSaleMaster": {
+      "description": "isSaleMaster",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN97"
+          },
+          {
+            "type": "option",
+            "value": "36"
+          }
+        ]
+      }
+    },
+    "isShowNewNotification": {
+      "description": "isShowNewNotification (VN -> option VN27; khác VN -> option MY12)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "country", "value": "VN" },
+              { "type": "option", "value": "VN27" }
+            ]
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "country", "operator": "NOT_EQUALS", "value": "VN" },
+              { "type": "option", "value": "MY12" }
+            ]
+          }
+        ]
+      }
+    },
+    "isPowerOffAbnormal_TH": {
+      "description": "isPowerOffAbnormal_TH",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "9T"
+          }
+        ]
+      }
+    },
+    "isDispatchRequireCapturePicture": {
+      "description": "isDispatchRequireCapturePicture",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH07"
+          },
+          {
+            "type": "option",
+            "value": "TH06"
+          }
+        ]
+      }
+    },
+    "isTH07": {
+      "description": "isTH07",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH07"
+          },
+          {
+            "type": "option",
+            "value": "TH06"
+          }
+        ]
+      }
+    },
+    "isDetailMaintenance": {
+      "description": "isDetailMaintenance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN64"
+          }
+        ]
+      }
+    },
+    "isTirepressure": {
+      "description": "isTirepressure",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2Q"
+          }
+        ]
+      }
+    },
+    "isDigitalTraffic": {
+      "description": "isDigitalTraffic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "3A"
+          }
+        ]
+      }
+    },
+    "getMapStyleId": {
+      "description": "getMapStyleId (option VN70 -> 70, else MapStyle.Local.Get())",
+      "type": "computed",
+      "returnType": "number",
+      "compute": "setting[0].Cust_Option.indexOf('VN70') > -1 ? 70 : Eup.GetModel('MapStyle').Local.Get()"
+    },
+    "isUseOpenStreetMap": {
+      "description": "isUseOpenStreetMap",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN70A"
+          }
+        ]
+      }
+    },
+    "isGroupCar": {
+      "description": "isGroupCar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN29"
+          }
+        ]
+      }
+    },
+    "isCSCDispatch": {
+      "description": "isCSCDispatch",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4M"
+          }
+        ]
+      }
+    },
+    "isCSCDispatchRegister": {
+      "description": "isCSCDispatchRegister",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4MA"
+          }
+        ]
+      }
+    },
+    "isCSCLandmarkRegister": {
+      "description": "isCSCLandmarkRegister",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "4MD"
+          }
+        ]
+      }
+    },
+    "isHistoryPathMarkerMoveAnimation": {
+      "description": "isHistoryPathMarkerMoveAnimation",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33A"
+          }
+        ]
+      }
+    },
+    "isDrawLostRoute": {
+      "description": "isDrawLostRoute",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "0H"
+          }
+        ]
+      }
+    },
+    "idle3MinLess": {
+      "description": "idle3MinLess",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33B"
+          }
+        ]
+      }
+    },
+    "isExecutiveBoardLocTarget": {
+      "description": "isExecutiveBoardLocTarget",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN34A"
+          }
+        ]
+      }
+    },
+    "allowCustomLandmark": {
+      "description": "allowCustomLandmark",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [{ "type": "constant", "name": "EUP_TRAFFIC_MODE", "negate": true }]
+      }
+    },
+    "isStartMileage": {
+      "description": "isStartMileage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY03"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isCutOffOilPower": {
+      "description": "isCutOffOilPower",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY04"
+          }
+        ]
+      }
+    },
+    "isShowScheduleComparison": {
+      "description": "isShowScheduleComparison",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY08"
+          }
+        ]
+      }
+    },
+    "isMonitorMultipleCarsDbSave": {
+      "description": "isMonitorMultipleCarsDbSave",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN61"
+          }
+        ]
+      }
+    },
+    "isAICustOption": {
+      "description": "isAICustOption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AI"
+          }
+        ]
+      }
+    },
+    "isAdminAccount": {
+      "description": "isAdminAccount (AccountInfo.Cust_PID === 'null')",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_PID",
+            "value": "null"
+          }
+        ]
+      }
+    },
+    "isShowCarInfoData": {
+      "description": "isShowCarInfoData",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "A6"
+          },
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_3"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isCusOptionA6": {
+      "description": "isCusOptionA6",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "A6"
+          }
+        ]
+      }
+    },
+    "isCustIMID17594": {
+      "description": "isCustIMID17594",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "17594"
+          }
+        ]
+      }
+    },
+    "isDispatchRentalCar": {
+      "description": "isDispatchRentalCar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85K"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "17594"
+          }
+        ]
+      }
+    },
+    "isDispatchJoinGroup": {
+      "description": "isDispatchJoinGroup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85L"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "17594"
+          }
+        ]
+      }
+    },
+    "isDispatchShowNotification": {
+      "description": "isDispatchShowNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85M"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "17594"
+          }
+        ]
+      }
+    },
+    "isShowCarNameInReport": {
+      "description": "isShowCarNameInReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN79A"
+          }
+        ]
+      }
+    },
+    "isStoreSortStatus": {
+      "description": "isStoreSortStatus",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "13962"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "17951"
+          }
+        ]
+      }
+    },
+    "isChangeNormalStatusColor": {
+      "description": "isChangeNormalStatusColor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02C"
+          }
+        ]
+      }
+    },
+    "isCustomerDataFormat": {
+      "description": "isCustomerDataFormat",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isHideCarNumberInSectionSpy": {
+      "description": "isHideCarNumberInSectionSpy",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AY"
+          }
+        ]
+      }
+    },
+    "isShowCopyCarInfo": {
+      "description": "isShowCopyCarInfo",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02K"
+          }
+        ]
+      }
+    },
+    "isCopyDriverLicense": {
+      "description": "isCopyDriverLicense",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "14131"
+              },
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "13638"
+              },
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "20406"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "isCustomCarInfoTextShow": {
+      "description": "isCustomCarInfoTextShow",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98G"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isCustomCarNote": {
+      "description": "isCustomCarNote",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowDayOffStatusInSectionSpy": {
+      "description": "isShowDayOffStatusInSectionSpy",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH02"
+          }
+        ]
+      }
+    },
+    "isUseLazyloadTableInSectionSpy": {
+      "description": "isUseLazyloadTableInSectionSpy",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02U"
+          }
+        ]
+      }
+    },
+    "isShowPowerOnOffNotification": {
+      "description": "isShowPowerOnOffNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "5N"
+          }
+        ]
+      }
+    },
+    "isShowTableStatistics": {
+      "description": "isShowTableStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "20051"
+          }
+        ]
+      }
+    },
+    "isShowQueryDetailReport": {
+      "description": "isShowQueryDetailReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "9K"
+          }
+        ]
+      }
+    },
+    "isCalculateDumpTruckTime": {
+      "description": "isCalculateDumpTruckTime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN104"
+          }
+        ]
+      }
+    },
+    "isHighlightExpiredShowReminder": {
+      "description": "isHighlightExpiredShowReminder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98E"
+          }
+        ]
+      }
+    },
+    "isShowTotalIOReport": {
+      "description": "isShowTotalIOReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN06"
+          }
+        ]
+      }
+    },
+    "isCust16341": {
+      "description": "isCust16341",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "16341"
+          }
+        ]
+      }
+    },
+    "isFormatDatetimeHistoryPath": {
+      "description": "isFormatDatetimeHistoryPath",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33C"
+          }
+        ]
+      }
+    },
+    "isAbnormalDetachment": {
+      "description": "isAbnormalDetachment",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BM"
+          }
+        ]
+      }
+    },
+    "isIMID19782": {
+      "description": "isIMID19782",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "19782"
+          }
+        ]
+      }
+    },
+    "isSendOrderToDriver": {
+      "description": "isSendOrderToDriver",
+      "type": "constant",
+      "defaultValue": false
+    },
+    "isRotateMap": {
+      "description": "isRotateMap",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [{ "type": "mobile" }, { "type": "function", "name": "isLeafletApi", "negate": true }, { "type": "option", "value": "VN70B" }]
+      }
+    },
+    "isIOGeofencingAbnormal": {
+      "description": "isIOGeofencingAbnormal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "03"
+          }
+        ]
+      }
+    },
+    "isGroupAuthority": {
+      "description": "isGroupAuthority: BV and not (EU and EM)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "BV" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "option", "operator": "NOT_INCLUDES", "value": "EU" },
+              { "type": "option", "operator": "NOT_INCLUDES", "value": "EM" }
+            ]
+          }
+        ]
+      }
+    },
+    "isHideMaxSpeedConfigReport": {
+      "description": "isHideMaxSpeedConfigReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          { "type": "option", "value": "VN15" },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowFactoryAndAsset": {
+      "description": "isShowFactoryAndAsset",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98F"
+          }
+        ]
+      }
+    },
+    "isTimeSettingForAbnormalStaying": {
+      "description": "isTimeSettingForAbnormalStaying",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "0Z"
+          }
+        ]
+      }
+    },
+    "isSetVisibleCarOnMapByStatus": {
+      "description": "isSetVisibleCarOnMapByStatus ((!VN và mobile) hoặc option VN02E/VN02J hoặc imid 13962)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [{ "type": "country", "operator": "NOT_EQUALS", "value": "VN" }, { "type": "mobile" }]
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "option", "value": "VN02E" },
+              { "type": "option", "value": "VN02J" },
+              { "type": "accountField", "key": "Cust_IMID", "value": "13962" }
+            ]
+          }
+        ]
+      }
+    },
+    "isQuickViewHistory": {
+      "description": "isQuickViewHistory",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isQuickViewDvrOneClick": {
+      "description": "isQuickViewDvrOneClick",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02H"
+          },
+          {
+            "type": "option",
+            "value": "VN02L"
+          }
+        ]
+      }
+    },
+    "isAlwaysQuickViewDvrOneClick": {
+      "description": "isAlwaysQuickViewDvrOneClick",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02L"
+          }
+        ]
+      }
+    },
+    "isCarryingGoods": {
+      "description": "isCarryingGoods",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02J"
+          }
+        ]
+      }
+    },
+    "isShowNotCardSwipeCar": {
+      "description": "isShowNotCardSwipeCar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isCustIMID13962": {
+      "description": "isCustIMID13962",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "13962"
+          }
+        ]
+      }
+    },
+    "isOverSpeedingSetting": {
+      "description": "isOverSpeedingSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY06"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isContinuousOverSpeeding": {
+      "description": "isContinuousOverSpeeding",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EA"
+          }
+        ]
+      }
+    },
+    "isUseOldDatePicker": {
+      "description": "isUseOldDatePicker",
+      "type": "constant",
+      "defaultValue": false
+    },
+    "isUseSelectHourInCalendar": {
+      "description": "isUseSelectHourInCalendar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "VN103" },
+          { "type": "mobile", "negate": true }
+        ]
+      }
+    },
+    "isCarMileAlert": {
+      "description": "isCarMileAlert",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN107"
+          }
+        ]
+      }
+    },
+    "isMonitorTimePeriodLimit": {
+      "description": "isMonitorTimePeriodLimit",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "option",
+                "value": "VN25B"
+              },
+              {
+                "type": "option",
+                "value": "VN25C"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "isMonitorTimePeriodLimitAccount": {
+      "description": "isMonitorTimePeriodLimitAccount (pid !== '' && !== 'null' && !== null && option VN25B)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "VN25B" },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": null }
+            ]
+          }
+        ]
+      }
+    },
+    "isReportTimePeriodLimitAccount": {
+      "description": "isReportTimePeriodLimitAccount (pid !== '' && !== 'null' && !== null && option VN25C)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "VN25C" },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": null }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowPunchFuelStatistics": {
+      "description": "isShowPunchFuelStatistics",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN88B"
+          }
+        ]
+      }
+    },
+    "isCutFileImmediate": {
+      "description": "isCutFileImmediate",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "F0"
+          }
+        ]
+      }
+    },
+    "isUseNewGetIconUrl": {
+      "description": "isUseNewGetIconUrl",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isShowCeibaMenu": {
+      "description": "isShowCeibaMenu",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN105"
+          }
+        ]
+      }
+    },
+    "isKerryFeature": {
+      "description": "isKerryFeature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH08"
+          }
+        ]
+      }
+    },
+    "isNewRecordOilPovision": {
+      "description": "isNewRecordOilPovision",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31C"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowKmEachTimePour": {
+      "description": "isShowKmEachTimePour",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31B"
+          },
+          {
+            "type": "option",
+            "value": "VN31D"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isChat": {
+      "description": "isChat",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "option", "value": "4DA" }
+        ]
+      }
+    },
+    "isExtraFuelConsumption": {
+      "description": "isExtraFuelConsumption",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85I"
+          }
+        ]
+      }
+    },
+    "isCustomPrintFooterSetting": {
+      "description": "isCustomPrintFooterSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN52"
+          }
+        ]
+      }
+    },
+    "isExtraMileRecordFuelChart": {
+      "description": "isExtraMileRecordFuelChart",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03F"
+          }
+        ]
+      }
+    },
+    "isShowBatteryPowerVolt": {
+      "description": "isShowBatteryPowerVolt",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "9U"
+          }
+        ]
+      }
+    },
+    "isShowCardRecords": {
+      "description": "isShowCardRecords",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH09"
+          }
+        ]
+      }
+    },
+    "isRecordListLocTargetPass": {
+      "description": "isRecordListLocTargetPass",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DD"
+          }
+        ]
+      }
+    },
+    "isShowNearByGoogleLandmark": {
+      "description": "isShowNearByGoogleLandmark",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DA"
+          }
+        ]
+      }
+    },
+    "isShowCarPopup": {
+      "description": "isShowCarPopup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          { "type": "mobile" },
+          { "type": "accountField", "key": "Cust_IMID", "operator": "NOT_EQUALS", "value": "14989" }
+        ]
+      }
+    },
+    "isTrailerPermissionLink": {
+      "description": "isTrailerPermissionLink",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AO"
+          }
+        ]
+      }
+    },
+    "isNoticeSetting": {
+      "description": "isNoticeSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "CS"
+          }
+        ]
+      }
+    },
+    "isTrailerNotUsed": {
+      "description": "isTrailerNotUsed",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AO"
+          }
+        ]
+      }
+    },
+    "isDeliveryByRoute": {
+      "description": "isDeliveryByRoute",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85J"
+          }
+        ]
+      }
+    },
+    "isAbnormalVideo": {
+      "description": "isAbnormalVideo",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "5J"
+          }
+        ]
+      }
+    },
+    "isMultipleHistoryPath": {
+      "description": "isMultipleHistoryPath (!isOneMonthQuery && (option VN02G hoặc !VN) && option không chứa FY)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "function", "name": "isOneMonthQuery", "negate": true },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "option", "value": "VN02G" },
+              { "type": "country", "operator": "NOT_EQUALS", "value": "VN" }
+            ]
+          },
+          { "type": "option", "operator": "NOT_INCLUDES", "value": "FY" }
+        ]
+      }
+    },
+    "importPunchRecord": {
+      "description": "importPunchRecord",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AA"
+          }
+        ]
+      }
+    },
+    "newPunchRecord": {
+      "description": "newPunchRecord",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BG"
+          }
+        ]
+      }
+    },
+    "isShareCarInfo": {
+      "description": "isShareCarInfo",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN02F"
+          }
+        ]
+      }
+    },
+    "isShowSearchByCarType": {
+      "description": "isShowSearchByCarType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "constant", "name": "EUP_TRAFFIC_MODE", "negate": true },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "option", "value": "DQ" },
+              { "type": "option", "value": "BR" },
+              { "type": "function", "name": "isShowDispatchCarType" }
+            ]
+          }
+        ]
+      }
+    },
+    "isFilterCarTypeByCustId": {
+      "description": "isFilterCarTypeByCustId",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DQ"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isWuSongSon": {
+      "description": "isWuSongSon (isWuSongCustomize && Cust_PID !== 'null' string)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "function", "name": "isWuSongCustomize" },
+          { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+        ]
+      }
+    },
+    "isSafeDistanceSetting": {
+      "description": "isSafeDistanceSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BC"
+          }
+        ]
+      }
+    },
+    "isShowIntegrateTab": {
+      "description": "isShowIntegrateTab",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FV"
+          }
+        ]
+      }
+    },
+    "enableDeviceAlert": {
+      "description": "enableDeviceAlert",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN27B"
+          }
+        ]
+      }
+    },
+    "enableSMS": {
+      "description": "enableSMS",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN27A"
+          }
+        ]
+      }
+    },
+    "enableEmailAlert": {
+      "description": "enableEmailAlert",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN27C"
+          }
+        ]
+      }
+    },
+    "isControlNewMessage": {
+      "description": "isControlNewMessage",
+      "type": "constant",
+      "defaultValue": false
+    },
+    "isShowFuelConsumptionIlding": {
+      "description": "isShowFuelConsumptionIlding",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03I"
+          }
+        ]
+      }
+    },
+    "isShowFuelConsumptionDriving": {
+      "description": "isShowFuelConsumptionDriving",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowFenceStatistical": {
+      "description": "isShowFenceStatistical",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "F1"
+          }
+        ]
+      }
+    },
+    "isShowLogTargets": {
+      "description": "isShowLogTargets",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN51A"
+          }
+        ]
+      }
+    },
+    "isNewRouteManagement": {
+      "description": "isNewRouteManagement (VN + option VN42)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          { "type": "option", "value": "VN42" }
+        ]
+      }
+    },
+    "isAgricultureCustomize": {
+      "description": "isAgricultureCustomize",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BH"
+          }
+        ]
+      }
+    },
+    "isRecordMarkerNewStatus": {
+      "description": "isRecordMarkerNewStatus",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN26A"
+          }
+        ]
+      }
+    },
+    "isLocTargetPass": {
+      "description": "isLocTargetPass",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "01"
+          }
+        ]
+      }
+    },
+    "isIOSReview": {
+      "description": "isIOSReview",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DL"
+          }
+        ]
+      }
+    },
+    "isNewDriveShare": {
+      "description": "isNewDriveShare",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BE"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "showSalaryField": {
+      "description": "showSalaryField",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "A7"
+          }
+        ]
+      }
+    },
+    "hasDriverNameOpt": {
+      "description": "hasDriverNameOpt",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "25"
+          }
+        ]
+      }
+    },
+    "isDriverRFID": {
+      "description": "isDriverRFID",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "7C"
+          }
+        ]
+      }
+    },
+    "showPunchWhenDrivingAbnormal": {
+      "description": "showPunchWhenDrivingAbnormal (TW + isTRID20 + isDriverRFID)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "function", "name": "isTRID20" },
+          { "type": "function", "name": "isDriverRFID" }
+        ]
+      }
+    },
+    "isApprovedFeature": {
+      "description": "isApprovedFeature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "CA"
+          }
+        ]
+      }
+    },
+    "showFactoryOverSpeed": {
+      "description": "showFactoryOverSpeed",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "94"
+          },
+          {
+            "type": "option",
+            "value": "20"
+          }
+        ]
+      }
+    },
+    "isHideLandmarkSetting": {
+      "description": "isHideLandmarkSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "0_1_2"
+          }
+        ]
+      }
+    },
+    "isShowDataByCustomerDelivery": {
+      "description": "isShowDataByCustomerDelivery (Cust_PID không rỗng + option FY)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          },
+          { "type": "option", "value": "FY" }
+        ]
+      }
+    },
+    "isHideMileInHistoryPath": {
+      "description": "isHideMileInHistoryPath (Cust_PID không rỗng + option TH26)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          },
+          { "type": "option", "value": "TH26" }
+        ]
+      }
+    },
+    "isTSMCsupplier": {
+      "description": "isTSMCsupplier",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BJ"
+          }
+        ]
+      }
+    },
+    "isTSMCcustomization": {
+      "description": "isTSMCcustomization (option BI, setting null → false)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "settingNullCheck": true,
+        "checks": [{ "type": "option", "value": "BI" }]
+      }
+    },
+    "isDifferentArrow": {
+      "description": "isDifferentArrow (VN + (imid 16651 hoặc 11322 hoặc option VN02O))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "16651" },
+              { "type": "accountField", "key": "Cust_IMID", "value": "11322" },
+              { "type": "option", "value": "VN02O" }
+            ]
+          }
+        ]
+      }
+    },
+    "isHideNotSignalCarOver72h": {
+      "description": "isHideNotSignalCarOver72h",
+      "type": "constant",
+      "defaultValue": false
+    },
+    "isShowSmallCarLabel": {
+      "description": "isShowSmallCarLabel (VN + (imid 11322 hoặc option VN02O))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "11322" },
+              { "type": "option", "value": "VN02O" }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowLargeCarMarker": {
+      "description": "isShowLargeCarMarker (VN + (imid 26679 hoặc option VN02S))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "26679" },
+              { "type": "option", "value": "VN02S" }
+            ]
+          }
+        ]
+      }
+    },
+    "isWarningACCLostSignal": {
+      "description": "isWarningACCLostSignal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN108"
+          }
+        ]
+      }
+    },
+    "isShareCarByAuthGroup": {
+      "description": "isShareCarByAuthGroup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "VN98N"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isLocTargetLocationAddress": {
+      "description": "isLocTargetLocationAddress",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN34C"
+          }
+        ]
+      }
+    },
+    "isShowWorkingHourManagement": {
+      "description": "isShowWorkingHourManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowIconWorkingHour": {
+      "description": "isShowIconWorkingHour",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02W"
+          }
+        ]
+      }
+    },
+    "isReportSpeedLimit": {
+      "description": "isReportSpeedLimit",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN28A"
+          }
+        ]
+      }
+    },
+    "forgetPunchAndDuplicateDriver": {
+      "description": "forgetPunchAndDuplicateDriver",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DO"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isUsingVnFuelLogic": {
+      "description": "isUsingVnFuelLogic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          { "type": "option", "operator": "NOT_INCLUDES", "value": "VN9R" }
+        ]
+      }
+    },
+    "replaceFuelHistoryBySummaryReport": {
+      "description": "replaceFuelHistoryBySummaryReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN9R1"
+          }
+        ]
+      }
+    },
+    "isShowBasicInformation": {
+      "description": "isShowBasicInformation",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_1"
+          }
+        ]
+      }
+    },
+    "isShowCarInformation": {
+      "description": "isShowCarInformation",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_2"
+          }
+        ]
+      }
+    },
+    "isShowCarTemperature": {
+      "description": "isShowCarTemperature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_5"
+          }
+        ]
+      }
+    },
+    "isShowCarSafe": {
+      "description": "isShowCarSafe",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_3_6"
+          }
+        ]
+      }
+    },
+    "isNewCarSafeConfig": {
+      "description": "isNewCarSafeConfig",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FU"
+          }
+        ]
+      }
+    },
+    "isMotoDriverSafeFeature": {
+      "description": "isMotoDriverSafeFeature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GH"
+          }
+        ]
+      }
+    },
+    "isBellSpecificFunction": {
+      "description": "isBellSpecificFunction",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN9R1"
+          }
+        ]
+      }
+    },
+    "isGuoSoonFuel": {
+      "description": "isGuoSoonFuel",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "A8"
+          }
+        ]
+      }
+    },
+    "isAiFengFuel": {
+      "description": "isAiFengFuel",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "WA"
+          }
+        ]
+      }
+    },
+    "isNFCWriteISOFormat": {
+      "description": "isNFCWriteISOFormat",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isShowAbnormalEmail": {
+      "description": "isShowAbnormalEmail",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "MY" },
+          { "type": "function", "name": "isAICustOption" }
+        ]
+      }
+    },
+    "showDriverDepartureAbnormal": {
+      "description": "showDriverDepartureAbnormal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AQ"
+          }
+        ]
+      }
+    },
+    "isCustomerGpsForward": {
+      "description": "isCustomerGpsForward (Cust_PID null + option CU)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "accountField", "key": "Cust_PID", "value": "null" },
+          { "type": "option", "value": "CU" }
+        ]
+      }
+    },
+    "isAbnormalWorkHour": {
+      "description": "isAbnormalWorkHour",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "option",
+                "value": "2X"
+              },
+              {
+                "type": "option",
+                "value": "4D"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "enableAutoGetOffWork": {
+      "description": "enableAutoGetOffWork",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DV"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isHarshNotification": {
+      "description": "isHarshNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "1Q"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isTHBDrivingTimeSetting": {
+      "description": "isTHBDrivingTimeSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "5G"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isSharpTurnNotification": {
+      "description": "isSharpTurnNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "3F"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isImproperStayNotification": {
+      "description": "isImproperStayNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2L"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isForbiddenRoadNotification": {
+      "description": "isForbiddenRoadNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2N"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isAbnormalIdleNotification": {
+      "description": "isAbnormalIdleNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "A0"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isTSA": {
+      "description": "isTSA",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "DJ"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isAllowEditCarMaintenance": {
+      "description": "isAllowEditCarMaintenance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98I"
+          },
+          {
+            "type": "country",
+            "operator": "NOT_EQUALS",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isListDailySummaryReport": {
+      "description": "isListDailySummaryReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isDriverLicense": {
+      "description": "isDriverLicense (EUP_DEALER === 'TW')",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [{ "type": "country", "value": "TW" }]
+      }
+    },
+    "showHiddenLostContactCar": {
+      "description": "showHiddenLostContactCar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "E0"
+          }
+        ]
+      }
+    },
+    "showSalesDaily": {
+      "description": "showSalesDaily",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "68"
+          }
+        ]
+      }
+    },
+    "showSalesMasterMultipleReport": {
+      "description": "showSalesMasterMultipleReport (Cust_Option không chứa 0_1_7)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_1_7"
+          }
+        ]
+      }
+    },
+    "sharedFactoryEditable": {
+      "description": "sharedFactoryEditable",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "CZ"
+          }
+        ]
+      }
+    },
+    "getFullStopWorkHourReportGPS": {
+      "description": "getFullStopWorkHourReportGPS",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN99A"
+          }
+        ]
+      }
+    },
+    "usingLocAreaTripReport": {
+      "description": "usingLocAreaTripReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN43C"
+          }
+        ]
+      }
+    },
+    "isWuSongCustomize": {
+      "description": "isWuSongCustomize",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BR"
+          }
+        ]
+      }
+    },
+    "isFatigueDrivingSetting": {
+      "description": "isFatigueDrivingSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "A1"
+          }
+        ]
+      }
+    },
+    "isAnticollisionAb": {
+      "description": "isAnticollisionAb",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BC"
+          }
+        ]
+      }
+    },
+    "isFeedingSensor": {
+      "description": "isFeedingSensor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "94"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isTemperatureSetting": {
+      "description": "isTemperatureSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN78A"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isRecordPunchCardMile": {
+      "description": "isRecordPunchCardMile",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "E1"
+          }
+        ]
+      }
+    },
+    "isIMID19050": {
+      "description": "isIMID19050",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "19050"
+          }
+        ]
+      }
+    },
+    "isNewAccessoryManagement": {
+      "description": "isNewAccessoryManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "22123"
+          }
+        ]
+      }
+    },
+    "isShowWorkingSummaryReport": {
+      "description": "isShowWorkingSummaryReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "38251"
+          }
+        ]
+      }
+    },
+    "isMoreFieldShow": {
+      "description": "isMoreFieldShow",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31H"
+          }
+        ]
+      }
+    },
+    "isAccessoryAccountLookup": {
+      "description": "isAccessoryAccountLookup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31F"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isCostAccountLookup": {
+      "description": "isCostAccountLookup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31E"
+          },
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          }
+        ]
+      }
+    },
+    "isRouteManagementStopWarning": {
+      "description": "isRouteManagementStopWarning",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN42A"
+          }
+        ]
+      }
+    },
+    "costManagementHideMileage": {
+      "description": "costManagementHideMileage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN31G"
+          }
+        ]
+      }
+    },
+    "historyPathTurnOffTab": {
+      "description": "historyPathTurnOffTab",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN33H"
+          }
+        ]
+      }
+    },
+    "isFenceAreaInOut": {
+      "description": "isFenceAreaInOut",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN94C"
+          }
+        ]
+      }
+    },
+    "isViewRecordingHistory": {
+      "description": "isViewRecordingHistory",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02P"
+          }
+        ]
+      }
+    },
+    "isShowVideoSound": {
+      "description": "isShowVideoSound",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "operator": "NOT_INCLUDES",
+            "value": "0_2_9"
+          }
+        ]
+      }
+    },
+    "isTireAbnormal": {
+      "description": "isTireAbnormal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "E5"
+          }
+        ]
+      }
+    },
+    "isTHBRules": {
+      "description": "isTHBRules",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "E2"
+          }
+        ]
+      }
+    },
+    "EDriverMaintainCheck": {
+      "description": "EDriverMaintainCheck",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "E6"
+          }
+        ]
+      }
+    },
+    "isNewInfoComprehensiveReport": {
+      "description": "isNewInfoComprehensiveReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN67"
+          }
+        ]
+      }
+    },
+    "isShowConcreteBusinessTrip": {
+      "description": "isShowConcreteBusinessTrip",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN43D"
+          }
+        ]
+      }
+    },
+    "isShowConcreteDispatchCar": {
+      "description": "isShowConcreteDispatchCar",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85N"
+          }
+        ]
+      }
+    },
+    "isShowMaintainNotificationPopup": {
+      "description": "isShowMaintainNotificationPopup",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN96C"
+          }
+        ]
+      }
+    },
+    "isShowFuelManagementNew": {
+      "description": "isShowFuelManagementNew",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03M"
+          }
+        ]
+      }
+    },
+    "DLTTransferFeature": {
+      "description": "DLTTransferFeature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH12"
+          }
+        ]
+      }
+    },
+    "isShowDispatchCode": {
+      "description": "isShowDispatchCode",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "29242"
+          }
+        ]
+      }
+    },
+    "newJourneyManagement": {
+      "description": "newJourneyManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN55B"
+          }
+        ]
+      }
+    },
+    "temperatureSignalContainer": {
+      "description": "temperatureSignalContainer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN40F"
+          }
+        ]
+      }
+    },
+    "isShowMaerskSetting": {
+      "description": "isShowMaerskSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN24A"
+          }
+        ]
+      }
+    },
+    "isNoLoadSetting": {
+      "description": "isNoLoadSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN35A"
+          },
+          {
+            "type": "urlParam",
+            "key": "isNoLoadSetting",
+            "value": "true"
+          }
+        ]
+      }
+    },
+    "isDispatchAutoAssignDriver": {
+      "description": "isDispatchAutoAssignDriver",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85O"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowCancelOrder": {
+      "description": "isShowCancelOrder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN85P"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowCheckListPage": {
+      "description": "isShowCheckListPage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "option",
+                "value": "VN36"
+              },
+              {
+                "type": "option",
+                "value": "VN36A"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "isCheckListAdmin": {
+      "description": "isCheckListAdmin (VN + option VN36 + Cust_PID null)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          { "type": "option", "value": "VN36" },
+          { "type": "accountField", "key": "Cust_PID", "value": "null" }
+        ]
+      }
+    },
+    "isCheckListManager": {
+      "description": "isCheckListManager",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN36A"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isExportADASPdf": {
+      "description": "isExportADASPdf",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EB"
+          }
+        ]
+      }
+    },
+    "isRouteMonitor": {
+      "description": "isRouteMonitor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN111"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowDetailRecordStopParking": {
+      "description": "isShowDetailRecordStopParking",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN30B"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowIntegrateFuelReport": {
+      "description": "isShowIntegrateFuelReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "ED"
+          }
+        ]
+      }
+    },
+    "isShowFireAbnormalCenterAndAbonrmalButton": {
+      "description": "isShowFireAbnormalCenterAndAbonrmalButton",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FQ"
+          }
+        ]
+      }
+    },
+    "isShowFireFightingChecklist": {
+      "description": "isShowFireFightingChecklist",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FR"
+          }
+        ]
+      }
+    },
+    "isShowFireFightingRecordList": {
+      "description": "isShowFireFightingRecordList",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FP"
+          }
+        ]
+      }
+    },
+    "isUpstreamPlatform": {
+      "description": "isUpstreamPlatform",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EM"
+          }
+        ]
+      }
+    },
+    "isDownstreamPlatform": {
+      "description": "isDownstreamPlatform",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EZ"
+          }
+        ]
+      }
+    },
+    "isIODoorMultiReport": {
+      "description": "isIODoorMultiReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN06A"
+          }
+        ]
+      }
+    },
+    "isMultiChannelMode": {
+      "description": "isMultiChannelMode",
+      "type": "constant",
+      "defaultValue": true
+    },
+    "isCloudTimelineVideo": {
+      "description": "isCloudTimelineVideo",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN121"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isSplitLostContactACC": {
+      "description": "isSplitLostContactACC",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN114"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowVehicleSpeedHistogram": {
+      "description": "isShowVehicleSpeedHistogram",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH13"
+          }
+        ]
+      }
+    },
+    "isCustIMID25942": {
+      "description": "isCustIMID25942",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "25942"
+          }
+        ]
+      }
+    },
+    "isCustIMID32870": {
+      "description": "isCustIMID32870",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "32870"
+          }
+        ]
+      }
+    },
+    "isCustIMID13498": {
+      "description": "isCustIMID13498",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "13498"
+          }
+        ]
+      }
+    },
+    "isRemoveDriveSmoothly": {
+      "description": "isRemoveDriveSmoothly",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "29743"
+          }
+        ]
+      }
+    },
+    "isShowRecordCompareFuelData": {
+      "description": "isShowRecordCompareFuelData",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03P"
+          }
+        ]
+      }
+    },
+    "isShowGasStationBrand": {
+      "description": "isShowGasStationBrand",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "MY"
+          }
+        ]
+      }
+    },
+    "isShowNoteDate": {
+      "description": "isShowNoteDate",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "MY"
+          }
+        ]
+      }
+    },
+    "isPhysiologicalDeleteFeature": {
+      "description": "isPhysiologicalDeleteFeature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FS"
+          }
+        ]
+      }
+    },
+    "isShowDateStatisticsTab": {
+      "description": "isShowDateStatisticsTab",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH22"
+          }
+        ]
+      }
+    },
+    "isShowWeekDrivingTime": {
+      "description": "isShowWeekDrivingTime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowAnnualPerformanceDashboard": {
+      "description": "isShowAnnualPerformanceDashboard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FX"
+          }
+        ]
+      }
+    },
+    "isTankCarMonitor": {
+      "description": "isTankCarMonitor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FZ"
+          }
+        ]
+      }
+    },
+    "isShowTankCarReportPage": {
+      "description": "isShowTankCarReportPage",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "function", "name": "isTankCarMonitor" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "value": "null" },
+              { "type": "accountField", "key": "Cust_PID", "value": null },
+              { "type": "accountField", "key": "Cust_PID", "value": "" }
+            ]
+          }
+        ]
+      }
+    },
+    "isShowRegulationsDriverDailyStatistic": {
+      "description": "isShowRegulationsDriverDailyStatistic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN19B"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowViolationDrivingDashboard": {
+      "description": "isShowViolationDrivingDashboard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05E"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowRegulationsDriverViolationDashboard": {
+      "description": "isShowRegulationsDriverViolationDashboard",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowSafeDriving": {
+      "description": "isShowSafeDriving",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "2T"
+          },
+          {
+            "type": "option",
+            "value": "4D"
+          }
+        ]
+      }
+    },
+    "isVinconsFeature": {
+      "description": "isVinconsFeature (VN + (imid 30808 hoặc option VN115))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "30808" },
+              { "type": "option", "value": "VN115" }
+            ]
+          }
+        ]
+      }
+    },
+    "isCocaColaRequirement": {
+      "description": "isCocaColaRequirement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05F"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isHeinekenRequirement": {
+      "description": "isHeinekenRequirement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "13085"
+          }
+        ]
+      }
+    },
+    "isShowMileageFilter": {
+      "description": "isShowMileageFilter",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isAllowEditRFID": {
+      "description": "isAllowEditRFID",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN58D"
+          },
+          {
+            "type": "option",
+            "value": "EM"
+          },
+          {
+            "type": "option",
+            "value": "EZ"
+          }
+        ]
+      }
+    },
+    "isShowInstallationAndViolationStatisticsReport": {
+      "description": "isShowInstallationAndViolationStatisticsReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EM"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowTutorialVideoNotification": {
+      "description": "isShowTutorialVideoNotification",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN91B"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowCardSwipeAbnormally": {
+      "description": "isShowCardSwipeAbnormally",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GD"
+          }
+        ]
+      }
+    },
+    "isEnableSharingVehicle": {
+      "description": "isEnableSharingVehicle",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GE"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isSharingTimeSlotFeature": {
+      "description": "isSharingTimeSlotFeature (TW + option EZ)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "option", "value": "EZ" }
+        ]
+      }
+    },
+    "isShowSLDPermitExpiredDate": {
+      "description": "isShowSLDPermitExpiredDate",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "MY"
+          }
+        ]
+      }
+    },
+    "isNewInfoDriverReminder": {
+      "description": "isNewInfoDriverReminder",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98K"
+          }
+        ]
+      }
+    },
+    "advanceReminderSetting": {
+      "description": "advanceReminderSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98L"
+          }
+        ]
+      }
+    },
+    "isShowAbnormalByCarType": {
+      "description": "isShowAbnormalByCarType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "mobile", "negate": true },
+          { "type": "function", "name": "isAICustOption", "negate": true },
+          { "type": "function", "name": "isShowDispatchCarType" }
+        ]
+      }
+    },
+    "isNewSortFieldBSMaintenance": {
+      "description": "isNewSortFieldBSMaintenance",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "newSetupRouteListing": {
+      "description": "newSetupRouteListing",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN55C"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "tripSettingReport": {
+      "description": "tripSettingReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EC"
+          }
+        ]
+      }
+    },
+    "journeyManagementCustomer": {
+      "description": "journeyManagementCustomer",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN55D"
+          }
+        ]
+      }
+    },
+    "isContinuousDriving": {
+      "description": "isContinuousDriving",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EH"
+          }
+        ]
+      }
+    },
+    "isDayDriving": {
+      "description": "isDayDriving",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EI"
+          }
+        ]
+      }
+    },
+    "isDispatchSystemNew": {
+      "description": "isDispatchSystemNew",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN86C"
+          }
+        ]
+      }
+    },
+    "isOnlyShowDispatchingCar": {
+      "description": "isOnlyShowDispatchingCar (Cust_PID không rỗng + option VN86D)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          },
+          { "type": "option", "value": "VN86D" }
+        ]
+      }
+    },
+    "isShowLostFuelSignalWarning": {
+      "description": "isShowLostFuelSignalWarning",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03N"
+          }
+        ]
+      }
+    },
+    "isShowTEMPWarningFuncSettingTime": {
+      "description": "isShowTEMPWarningFuncSettingTime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN78B"
+          }
+        ]
+      }
+    },
+    "isSummaryJourneyNewParam": {
+      "description": "isSummaryJourneyNewParam",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN51B"
+          }
+        ]
+      }
+    },
+    "isShowCarDriverSetting": {
+      "description": "isShowCarDriverSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN58B"
+          }
+        ]
+      }
+    },
+    "isDisableSharingSettingFunction": {
+      "description": "isDisableSharingSettingFunction (option VN122 && !EUP_DEBUG_MODE)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "option", "value": "VN122" },
+          { "type": "constant", "name": "EUP_DEBUG_MODE", "negate": true }
+        ]
+      }
+    },
+    "isShowEsg": {
+      "description": "isShowEsg",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EL"
+          }
+        ]
+      }
+    },
+    "notQueryToday": {
+      "description": "notQueryToday",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "ET"
+          }
+        ]
+      }
+    },
+    "isShowShuttleType": {
+      "description": "isShowShuttleType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GJ"
+          }
+        ]
+      }
+    },
+    "isTSMCTraffic": {
+      "description": "isTSMCTraffic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EU"
+          }
+        ]
+      }
+    },
+    "isShowTurnoffTimeSetting": {
+      "description": "isShowTurnoffTimeSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN134"
+          }
+        ]
+      }
+    },
+    "isFireFighting": {
+      "description": "isFireFighting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EP"
+          }
+        ]
+      }
+    },
+    "isFireFightingDrone": {
+      "description": "isFireFightingDrone",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EQ"
+          }
+        ]
+      }
+    },
+    "isCollisonAbnormalFeature": {
+      "description": "isCollisonAbnormalFeature",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "ER"
+          }
+        ]
+      }
+    },
+    "isFireFightingMonitorVideo": {
+      "description": "isFireFightingMonitorVideo",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "ES"
+          }
+        ]
+      }
+    },
+    "isShowCrashGravity": {
+      "description": "isShowCrashGravity",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EY"
+          }
+        ]
+      }
+    },
+    "isNewDetailSummaryRecord": {
+      "description": "isNewDetailSummaryRecord",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN51"
+          }
+        ]
+      }
+    },
+    "isFuelDataComprehensiveReport": {
+      "description": "isFuelDataComprehensiveReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN67A"
+          }
+        ]
+      }
+    },
+    "onlyshowSelfLocArea": {
+      "description": "onlyshowSelfLocArea",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "0_3_0"
+          }
+        ]
+      }
+    },
+    "showFenceIoAbnormal": {
+      "description": "showFenceIoAbnormal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "AD"
+          }
+        ]
+      }
+    },
+    "showLimitLostContactTimeMes": {
+      "description": "showLimitLostContactTimeMes",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN116"
+          }
+        ]
+      }
+    },
+    "showCarDrivingOnSectionSpy": {
+      "description": "showCarDrivingOnSectionSpy",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN02T"
+          }
+        ]
+      }
+    },
+    "showRecordCheckinOilProvision": {
+      "description": "showRecordCheckinOilProvision",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN88C"
+          }
+        ]
+      }
+    },
+    "showFuelChart": {
+      "description": "showFuelChart",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN03O"
+          }
+        ]
+      }
+    },
+    "isShowGroupNameInReport": {
+      "description": "isShowGroupNameInReport (imid 7112 + VN)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          { "type": "accountField", "key": "Cust_IMID", "value": "7112" }
+        ]
+      }
+    },
+    "isShowContentGDEVICE": {
+      "description": "isShowContentGDEVICE",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "userLoginViewPageControl": {
+      "description": "userLoginViewPageControl",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FF"
+          }
+        ]
+      }
+    },
+    "showElectricVehicleGasType": {
+      "description": "showElectricVehicleGasType",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FH"
+          }
+        ]
+      }
+    },
+    "isDownloadWithMapRecordList": {
+      "description": "isDownloadWithMapRecordList (VN + (imid 16359 hoặc 922))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "16359" },
+              { "type": "accountField", "key": "Cust_IMID", "value": "922" }
+            ]
+          }
+        ]
+      }
+    },
+    "showCarAttachmentUploadManagement": {
+      "description": "showCarAttachmentUploadManagement",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FG"
+          }
+        ]
+      }
+    },
+    "isReservationRecord": {
+      "description": "isReservationRecord",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH16"
+          }
+        ]
+      }
+    },
+    "showZaloSetting": {
+      "description": "showZaloSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN27D"
+          }
+        ]
+      }
+    },
+    "showMultiCarCheckReport": {
+      "description": "showMultiCarCheckReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH19"
+          }
+        ]
+      }
+    },
+    "isMergeByTimeRecordList": {
+      "description": "isMergeByTimeRecordList (VN + (imid 16359 hoặc 35207))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_IMID", "value": "16359" },
+              { "type": "accountField", "key": "Cust_IMID", "value": "35207" }
+            ]
+          }
+        ]
+      }
+    },
+    "isBatchEditCarInfor": {
+      "description": "isBatchEditCarInfor",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FT"
+          }
+        ]
+      }
+    },
+    "forceUseHlsStreaming": {
+      "description": "forceUseHlsStreaming",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "FN"
+          }
+        ]
+      }
+    },
+    "isEditSharedLandmark": {
+      "description": "isEditSharedLandmark ((Cust_PID null hoặc !Cust_PID) + option VN34B)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "value": "null" },
+              { "type": "accountField", "key": "Cust_PID", "value": null },
+              { "type": "accountField", "key": "Cust_PID", "value": "" }
+            ]
+          },
+          { "type": "option", "value": "VN34B" }
+        ]
+      }
+    },
+    "isShowBlackSpotsSetting": {
+      "description": "isShowBlackSpotsSetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN118"
+          }
+        ]
+      }
+    },
+    "isShowShipmentQuerySystem": {
+      "description": "isShowShipmentQuerySystem",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH18"
+          }
+        ]
+      }
+    },
+    "showVehicleTiltAbnormality": {
+      "description": "showVehicleTiltAbnormality",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "ER"
+          }
+        ]
+      }
+    },
+    "isAbnormalDisplacementAfterEngineOff": {
+      "description": "isAbnormalDisplacementAfterEngineOff",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GB"
+          }
+        ]
+      }
+    },
+    "isViewShareCarAccessoryList": {
+      "description": "isViewShareCarAccessoryList (Cust_PID không rỗng + option VN31I)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "group",
+            "operator": "AND",
+            "checks": [
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "" },
+              { "type": "accountField", "key": "Cust_PID", "operator": "NOT_EQUALS", "value": "null" }
+            ]
+          },
+          { "type": "option", "value": "VN31I" }
+        ]
+      }
+    },
+    "isCheckPassword": {
+      "description": "isCheckPassword (url isCheckPassword hoặc option VN79C)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          { "type": "urlParam", "key": "isCheckPassword", "value": "true" },
+          { "type": "option", "value": "VN79C" }
+        ]
+      }
+    },
+    "isShowFieldCameraSectionSpy": {
+      "description": "isShowFieldCameraSectionSpy (option VN102, 1A, 1B, 1J, 1G bất kỳ)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          { "type": "option", "value": "VN102" },
+          { "type": "option", "value": "1A" },
+          { "type": "option", "value": "1B" },
+          { "type": "option", "value": "1J" },
+          { "type": "option", "value": "1G" }
+        ]
+      }
+    },
+    "isReIssuePassword": {
+      "description": "isReIssuePassword",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN79D"
+          }
+        ]
+      }
+    },
+    "isShowSpeedLimitSetting": {
+      "description": "isShowSpeedLimitSetting (TW + option DZ)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "option", "value": "DZ" }
+        ]
+      }
+    },
+    "isShowIntegrateSpeedLimitSetting": {
+      "description": "isShowIntegrateSpeedLimitSetting (TW + option EV)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "option", "value": "EV" }
+        ]
+      }
+    },
+    "isShowCarDriverRFID": {
+      "description": "isShowCarDriverRFID",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN50A"
+          }
+        ]
+      }
+    },
+    "isShowAlcoholChartReport": {
+      "description": "isShowAlcoholChartReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH23"
+          }
+        ]
+      }
+    },
+    "isAllowDelManyDrivers": {
+      "description": "isAllowDelManyDrivers",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN98M"
+          },
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShareIndependentMonitorCar": {
+      "description": "isShareIndependentMonitorCar (url isShareIndependentMonitorCar hoặc option VN02V)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "OR",
+        "checks": [
+          { "type": "urlParam", "key": "isShareIndependentMonitorCar", "value": "true" },
+          { "type": "option", "value": "VN02V" }
+        ]
+      }
+    },
+    "isHighlightAndNoteReminder": {
+      "description": "isHighlightAndNoteReminder (VN + imid 35490)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "35490"
+          }
+        ]
+      }
+    },
+    "isShowDriverNameLossStatic": {
+      "description": "isShowDriverNameLossStatic",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "12830"
+          }
+        ]
+      }
+    },
+    "isShowDLTBookFormReport": {
+      "description": "isShowDLTBookFormReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH25"
+          }
+        ]
+      }
+    },
+    "isModifyDriverByChildrenAccount": {
+      "description": "isModifyDriverByChildrenAccount",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN91A"
+          }
+        ]
+      }
+    },
+    "isShowAllDayRecordFuelCost": {
+      "description": "isShowAllDayRecordFuelCost (VN + imid 32870)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "32870"
+          }
+        ]
+      }
+    },
+    "isShowShipmentReport": {
+      "description": "isShowShipmentReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN88D"
+          }
+        ]
+      }
+    },
+    "isShowVendorWorkingHourReport": {
+      "description": "isShowVendorWorkingHourReport",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "EM"
+          }
+        ]
+      }
+    },
+    "isAccelerateDownload": {
+      "description": "isAccelerateDownload",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GA"
+          }
+        ]
+      }
+    },
+    "isRecordFuelChartADC01": {
+      "description": "isRecordFuelChartADC01",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "ADC01"
+          }
+        ]
+      }
+    },
+    "isShowWarningReportByFieldSetting": {
+      "description": "isShowWarningReportByFieldSetting (VN + imid 35490)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "35490"
+          }
+        ]
+      }
+    },
+    "showAsoluteSoS": {
+      "description": "showAsoluteSoS",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "MY13"
+          }
+        ]
+      }
+    },
+    "isShowbatchImportAuthoritySetting": {
+      "description": "isShowbatchImportAuthoritySetting",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          }
+        ]
+      }
+    },
+    "isShowbatchImportCarsMonitoring": {
+      "description": "isShowbatchImportCarsMonitoring",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "12830"
+          }
+        ]
+      }
+    },
+    "isShowWDReportDownload": {
+      "description": "isShowWDReportDownload",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "TH27"
+          }
+        ]
+      }
+    },
+    "isShowBlindSpotAbnomal": {
+      "description": "isShowBlindSpotAbnomal",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "BSD"
+          }
+        ]
+      }
+    },
+    "isQueryByQuarterSafeReportDriver": {
+      "description": "isQueryByQuarterSafeReportDriver",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "VN05J"
+          }
+        ]
+      }
+    },
+    "isShowDriverLicenseInPunchRecord": {
+      "description": "isShowDriverLicenseInPunchRecord (TW + Tr_ID 20)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "accountField", "key": "Tr_ID", "value": 20 }
+        ]
+      }
+    },
+    "isShowWorkingHourRemindUnsetData": {
+      "description": "isShowWorkingHourRemindUnsetData",
+      "type": "constant",
+      "defaultValue": false
+    },
+    "isShowExceptionSettingsTiltAbnormality": {
+      "description": "isShowExceptionSettingsTiltAbnormality (TW + imid 31727)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          { "type": "accountField", "key": "Cust_IMID", "value": "31727" }
+        ]
+      }
+    },
+    "isCheckQCVN06": {
+      "description": "isCheckQCVN06 (VN + (Cust_IMID hoặc Cust_PID thuộc ['922','24444']))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "922"
+              },
+              {
+                "type": "accountField",
+                "key": "Cust_PID",
+                "value": "922"
+              },
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "24444"
+              },
+              {
+                "type": "accountField",
+                "key": "Cust_PID",
+                "value": "24444"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "isCheckBarCodeDrivingRight": {
+      "description": "isCheckBarCodeDrivingRight (EUP_DEALER === 'TW')",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [{ "type": "country", "value": "TW" }]
+      }
+    },
+    "isHideImageReport": {
+      "description": "isHideImageReport (option VN17, !setting || !setting.length → false)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "settingEmptyCheck": true,
+        "checks": [{ "type": "option", "value": "VN17" }]
+      }
+    },
+    "isChiaYiGPS": {
+      "description": "isChiaYiGPS",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "option",
+            "value": "GI"
+          }
+        ]
+      }
+    },
+    "isSortReportDataByCarName": {
+      "description": "isSortReportDataByCarName",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          {
+            "type": "country",
+            "value": "VN"
+          },
+          {
+            "type": "accountField",
+            "key": "Cust_IMID",
+            "value": "37910"
+          }
+        ]
+      }
+    },
+    "isHideQCVNData": {
+      "description": "isHideQCVNData (country VN + imid 26630; location.host gps247.vn runtime)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          { "type": "accountField", "key": "Cust_IMID", "value": "26630" }
+        ]
+      }
+    },
+    "isStayLocomotionMeters": {
+      "description": "isStayLocomotionMeters (EUP_DEBUG_MODE + Cust_PID null + option 33)",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "constant", "name": "EUP_DEBUG_MODE" },
+          { "type": "accountField", "key": "Cust_PID", "value": "null" },
+          { "type": "option", "value": "33" }
+        ]
+      }
+    },
+    "isShowGPSTransfer": {
+      "description": "isShowGPSTransfer (TW + (Tr_ID 20 hoặc haveGPSTransferCar runtime))",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "TW" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [{ "type": "accountField", "key": "Tr_ID", "value": 20 }]
+          }
+        ]
+      }
+    },
+    "isExtraLimitSearchTime": {
+      "description": "isExtraLimitSearchTime (VN + imid 20444|15368); CS còn location.host gps247.vn — runtime",
+      "type": "boolean",
+      "conditions": {
+        "operator": "AND",
+        "checks": [
+          { "type": "country", "value": "VN" },
+          {
+            "type": "group",
+            "operator": "OR",
+            "checks": [
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "20444"
+              },
+              {
+                "type": "accountField",
+                "key": "Cust_IMID",
+                "value": "15368"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
